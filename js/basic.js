@@ -15,7 +15,7 @@ async function getData() {
         let td2 = document.createElement("td");
 
         td1.innerText = municipality[key];
-        td2.innerText = population[index]
+        td2.innerText = population[index];
         tr.appendChild(td1);
         tr.appendChild(td2);
 
