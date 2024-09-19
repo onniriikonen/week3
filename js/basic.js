@@ -23,4 +23,23 @@ async function getData() {
     });
 }
 
+async function getEmployment() {
+    const url = "https://statfin.stat.fi/PxWeb/sq/5e288b40-f8c8-4f1e-b3b0-61b86ce5c065";
+    const employmentPromise = await fetch(url);
+    const employmentJSON = await employmentPromise.json();
+
+    const employment = employmentJSON.dataset.value;
+    const rows = table.querySelectorAll("tr");
+
+    employment.forEach((value, index) => {
+        let td = document.createElement("td"); 
+
+        td.innerText = value;
+        rows[index].appendChild(td);
+    });
+}
+
+
+
 getData();
+getEmployment();
