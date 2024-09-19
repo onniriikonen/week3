@@ -39,7 +39,37 @@ async function getEmployment() {
     });
 }
 
+function calculate() {
+    const rows = table.querySelectorAll("tr");
+    
+    rows.forEach((row) => {
+        const populationCell = row.cells[1];
+        const employmentCell = row.cells[2];
+
+        const populationRow = parseFloat(populationCell.innerText);
+        const employmentRow = parseFloat(employmentCell.innerText);
+
+        let td = document.createElement("td");
+        const percentage = (employmentRow / populationRow * 100).toFixed(2);
+        td.innerText = percentage + '%';
+
+        row.appendChild(td);
+
+        if (percentage > 45) {
+            row.classList.add("over45");
+        } else if (percentage < 25) {
+            row.classList.add("under25");
+        }
+    });
+}
+
+async function load() {
+    await getData();
+    await getEmployment();
+    calculate();
+}
+
+load();
 
 
-getData();
-getEmployment();
+
